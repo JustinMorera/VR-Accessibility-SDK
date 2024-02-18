@@ -32,6 +32,7 @@ public class ManualAccessibility : Editor
                     string description = (string)descriptionProperty.GetValue(component, null);
                     Debug.Log("Description found in component: " + type.Name + " - " + description);
                     text += description + " ";
+                    break;
                 }
             }
 
