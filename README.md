@@ -1,34 +1,28 @@
 # VR Accessibility SDK
 ## Overview
-The VR Accessibility SDK is a toolkit designed to make virtual reality experiences more accessible to users with visual impairments. It provides a set of features and utilities that developers can integrate into their VR applications to improve accessibility and ensure that all users can enjoy their experiences.
+The VR Accessibility SDK is a toolkit designed to make virtual reality experiences more accessible to users with visual impairments. It provides a set of tools and features that developers can integrate into their VR applications to improve accessibility and ensure that all users can enjoy their experiences.
 
 ## Features
-* **Voice Commands**: Enable users to interact with VR applications using voice commands.
+* **Partial Vision Tool**: Allows users to target objects to bring up descriptive text menus.
+* **Alt-Text Generation**: Allows developers to add alt-text descriptions to GameObjects via editor script; features both manual and automated editor tools.
 * **Text-to-Speech (TTS)**: Provide spoken feedback for text-based content to assist users with visual impairments.
-* **Navigation Aids**: Assist users with mobility impairments in navigating virtual environments.
-* **Customizable UI**: Make user interfaces more accessible through customizable options for font size, color contrast, and control schemes.
-* **Controller Mapping**: Allow users to customize controller mappings to accommodate different input devices and preferences.
-* **Documentation**: Comprehensive documentation and examples to help developers integrate accessibility features into their projects.
+* **Alt-Text Linting**: Checks for presence, completeness, and clarity among alt-text fields among GameObjects.
 
 ## Installation
 1. Download the Accessibility in VR Unity SDK from GitHub.
 2. Import the SDK package into your Unity project.
-3. Follow the integration guide in the documentation to set up accessibility features in your VR application.
-
+    a. Add the **'AccessibilityTags.cs'** script to project's **/Scripts** folder.
+    b. Add the editor scripts in the **/Editor** folder to project's **/Editor** folder.
+    c. Add the **'PartialVis.cs'** script to project's **/Assets** folder.
+    
 ## Usage
-* Add the **'AccessibilityManager'** prefab to your scene to initialize the accessibility system.
-* Use the provided APIs to implement voice commands, TTS, navigation aids, and customizable UI elements.
-* Test your application with accessibility features enabled to ensure compatibility with diverse user needs.
-
-## Documentation
-* Check out the Wiki for detailed documentation, API references, and usage examples.
-* Visit the Issues page to report bugs, suggest improvements, or request new features.
-
-## Contributing
-Contributions to the Accessibility in VR Unity SDK are welcome! Please follow the contribution guidelines before submitting pull requests.
+* Use **'Tools'/'Add Accessible Field(s) to entire scene'** command in upper Unity menu bar to add appropriate fields to all GameObjects in scene
+* Use **[RMB] -> 'Add Accessible Field(s)'** command to add fields to selected GameObject * *Will create separate buttons for each field*
+* Add an instance of the Partial Vision tool to scene*?*
+* Set up input command for Partial Vision tool*?*
 
 ## License
-This project is licensed under the MIT License.
+?
 
 ## Contact
 For questions, feedback, or support, contact us at [ju691930@ucf.edu](ju691930@ucf.edu).
