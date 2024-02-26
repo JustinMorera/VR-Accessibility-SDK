@@ -22,6 +22,14 @@ public class AutoAccessibility : Editor
         {
             if (obj != null)
             {
+                // Store object's AccessibilityTags script, if it exists
+                AccessibilityTags.AccessibilityTags script = obj.GetComponent<AccessibilityTags.AccessibilityTags>();
+                // If script exists, update altText to object's name
+                if (script == null)
+                {
+                    script = Undo.AddComponent<AccessibilityTags.AccessibilityTags>(obj);
+                    Debug.Log("Alt Text successfully added to " + obj.name);
+                }
                 // Check if object exists and has a Collider and an active Renderer script attached
                 renderer = obj.GetComponent<Renderer>();
                 collider = obj.GetComponent<MeshCollider>();
@@ -46,31 +54,16 @@ public class AutoAccessibility : Editor
                                 break;
                             }
                         }
-
-                        // Store object's AccessibilityTags script, if it exists
-                        AccessibilityTags.AccessibilityTags script = obj.GetComponent<AccessibilityTags.AccessibilityTags>();
-                        // If script exists, update altText to object's name
-                        if (script != null)
-                        {
-                            // if (obj.interactable == true)
-                            // {
-                            //     text += "It is interactible.";
-                            // }
-                            // else
-                            // {
-                            //     text += "It is NOT interactible.";
-                            // }
-                            script.AltText = text;
-                            Debug.Log("Alt Text successfully updated for " + obj.name);
-                        }
-                        else // Otherwise, add accessibility script and altText
-                        {
-                            script = Undo.AddComponent<AccessibilityTags.AccessibilityTags>(obj);
-                            script.AltText = text;
-                            Debug.Log("Alt Text successfully added to " + obj.name);
-                        }
-                        // Mark selected GameObject as dirty to save changes
-                        EditorUtility.SetDirty(obj);
+                        // if (obj.interactable == true)
+                        // {
+                        //     text += "It is interactible.";
+                        // }
+                        // else
+                        // {
+                        //     text += "It is NOT interactible.";
+                        // }
+                        script.AltText = text;
+                        Debug.Log("Alt Text successfully updated for " + obj.name);
                     }
                     else
                     {
@@ -81,6 +74,8 @@ public class AutoAccessibility : Editor
                 {
                     Debug.Log("Failed to add Alt Text to " + obj.name + " (selected object may not have a Mesh Collider)");
                 }
+                // Mark selected GameObject as dirty to save changes
+                EditorUtility.SetDirty(obj);
             }
         }
         // Mark scene dirty to save changes to the scene
