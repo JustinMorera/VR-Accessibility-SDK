@@ -16,61 +16,70 @@ public class AutoAccessibility : Editor
         // Store GameObjects
         GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
         Renderer renderer;
+        MeshCollider collider;
         // Iterate through each object
         foreach (GameObject obj in objects)
         {
             if (obj != null)
             {
+                // Check if object exists and has a Collider and an active Renderer script attached
                 renderer = obj.GetComponent<Renderer>();
-                // Check if object exists and has a Mesh Collider script attached
-                if (renderer != null && renderer.enabled == true)
+                collider = obj.GetComponent<MeshCollider>();
+                if (collider != null)
                 {
-                    string text = "This is a " + obj.name + ". ";
-
-                    // Check if object has a description somewhere
-                    Component[] components = obj.GetComponents<Component>();
-                    foreach (Component component in components)
+                    if (renderer != null && renderer.enabled == true)
                     {
-                        Type type = component.GetType();
-                        PropertyInfo descriptionProperty = type.GetProperty("description");
+                        string text = "This is a " + obj.name + ". ";
 
-                        if (descriptionProperty != null)
+                        // Check if object has a description somewhere
+                        Component[] components = obj.GetComponents<Component>();
+                        foreach (Component component in components)
                         {
-                            string description = (string)descriptionProperty.GetValue(component, null);
-                            Debug.Log("Description found in component: " + type.Name + " - " + description);
-                            text += description + " ";
-                            break;
-                        }
-                    }
+                            Type type = component.GetType();
+                            PropertyInfo descriptionProperty = type.GetProperty("description");
 
-                    // Store object's AccessibilityTags script, if it exists
-                    AccessibilityTags.AccessibilityTags script = obj.GetComponent<AccessibilityTags.AccessibilityTags>();
-                    // If script exists, update altText to object's name
-                    if (script != null)
-                    {
-                        // if (obj.interactable == true)
-                        // {
-                        //     text += "It is interactible.";
-                        // }
-                        // else
-                        // {
-                        //     text += "It is NOT interactible.";
-                        // }
-                        script.AltText = text;
-                        Debug.Log("Alt Text successfully updated for " + obj.name);
+                            if (descriptionProperty != null)
+                            {
+                                string description = (string)descriptionProperty.GetValue(component, null);
+                                Debug.Log("Description found in component: " + type.Name + " - " + description);
+                                text += description + " ";
+                                break;
+                            }
+                        }
+
+                        // Store object's AccessibilityTags script, if it exists
+                        AccessibilityTags.AccessibilityTags script = obj.GetComponent<AccessibilityTags.AccessibilityTags>();
+                        // If script exists, update altText to object's name
+                        if (script != null)
+                        {
+                            // if (obj.interactable == true)
+                            // {
+                            //     text += "It is interactible.";
+                            // }
+                            // else
+                            // {
+                            //     text += "It is NOT interactible.";
+                            // }
+                            script.AltText = text;
+                            Debug.Log("Alt Text successfully updated for " + obj.name);
+                        }
+                        else // Otherwise, add accessibility script and altText
+                        {
+                            script = Undo.AddComponent<AccessibilityTags.AccessibilityTags>(obj);
+                            script.AltText = text;
+                            Debug.Log("Alt Text successfully added to " + obj.name);
+                        }
+                        // Mark selected GameObject as dirty to save changes
+                        EditorUtility.SetDirty(obj);
                     }
-                    else // Otherwise, add accessibility script and altText
+                    else
                     {
-                        script = Undo.AddComponent<AccessibilityTags.AccessibilityTags>(obj);
-                        script.AltText = text;
-                        Debug.Log("Alt Text successfully added to " + obj.name);
+                        Debug.Log("Failed to add Alt Text to " + obj.name + " (selected object may not have an active Renderer)");
                     }
-                    // Mark selected GameObject as dirty to save changes
-                    EditorUtility.SetDirty(obj);
                 }
                 else
                 {
-                    Debug.Log("Failed to add Alt Text to " + obj.name + " (selected object may not have an active Renderer)");
+                    Debug.Log("Failed to add Alt Text to " + obj.name + " (selected object may not have a Mesh Collider)");
                 }
             }
         }
