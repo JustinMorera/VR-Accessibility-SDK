@@ -11,7 +11,7 @@ public class AutoAccessibility : Editor
 {    
     // Right-click option for GameObjects
     [MenuItem("Tools/Add Accessible Field(s) to entire scene")]
-    private static void AddField(MenuCommand menuCommand)
+    private static void AddFields(MenuCommand menuCommand)
     {
         // Store GameObjects
         GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
@@ -76,6 +76,30 @@ public class AutoAccessibility : Editor
                 }
                 // Mark selected GameObject as dirty to save changes
                 EditorUtility.SetDirty(obj);
+            }
+        }
+        // Mark scene dirty to save changes to the scene
+        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+    }
+
+    [MenuItem("Tools/Remove Accessible Field(s) from entire scene")]
+    private static void RemoveFields(MenuCommand menuCommand)
+    {
+        // Store GameObjects
+        GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
+        // Iterate through each object
+        foreach (GameObject obj in objects)
+        {
+            if (obj != null)
+            {
+                // Store object's AccessibilityTags script, if it exists
+                AccessibilityTags.AccessibilityTags script = obj.GetComponent<AccessibilityTags.AccessibilityTags>();
+                // If script exists, update altText to object's name
+                if (script != null)
+                {
+                    DestroyImmediate(script);
+                    Debug.Log("Accessibility Fields successfully removed from " + obj.name);
+                }
             }
         }
         // Mark scene dirty to save changes to the scene
