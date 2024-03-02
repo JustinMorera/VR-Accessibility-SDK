@@ -25,12 +25,12 @@ public class ManualAccessibility : Editor
             foreach (Component component in components)
             {
                 Type type = component.GetType();
-                PropertyInfo descriptionProperty = type.GetProperty("description");
+                FieldInfo descriptionField = type.GetField("description", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy);
 
-                if (descriptionProperty != null)
+                if (descriptionField != null)
                 {
-                    string description = (string)descriptionProperty.GetValue(component, null);
-                    Debug.Log("Description found in component: " + type.Name + " - " + description);
+                    string description = (string)descriptionField.GetValue(component);
+                    Debug.Log("Description found in component: " + selectedObject.name + " - " + type.Name);
                     text += description + " ";
                     break;
                 }
