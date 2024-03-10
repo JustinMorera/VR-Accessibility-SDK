@@ -1,0 +1,25 @@
+{
+  "name": "com.Polaris.VR-Accessibility-SDK",
+  "version": "0.1.0",
+  "displayName": "VR Accessibility SDK",
+  "description": "Accessibility features for VR Unity projects.\n Created by Senior Design Group G22 Spring 2024.",
+  "unity": "",
+  "unityRelease": "",
+  "documentationUrl": "https://github.com/JustinMorera/VR-Accessbility-SDK",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  "dependencies": {
+    "com.unity.inputsystem": "1.4.4",
+    "com.unity.xr.interaction.toolkit": "2.0.4"
+ },
+ "keywords": [
+    "VR",
+    "Virtual Reality",
+    "Accessibility"
+  ],
+  "author": {
+    "name": "Justin Morera",
+    "email": "ju691930@ucf.edu",
+    "url": "https://www.linkedin.com/in/justin-morera-a4a568153/"
+  }
+}
