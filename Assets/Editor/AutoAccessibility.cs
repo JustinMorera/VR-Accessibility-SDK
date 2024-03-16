@@ -1,8 +1,8 @@
-using System;
-using System.Reflection;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using System;
+using System.Reflection;
 using AccessibilityTags;
 
 // Editor script that Adds AltText to ALL GameObjects
