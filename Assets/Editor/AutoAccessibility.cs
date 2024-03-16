@@ -6,7 +6,8 @@ using UnityEngine;
 using AccessibilityTags;
 
 // Editor script that Adds AltText to ALL GameObjects
-public class AutoAccessibility
+[CustomEditor(typeof(GameObject))]
+public class AutoAccessibility : Editor
 {    
     // Right-click option for GameObjects
     [MenuItem("Tools/Add Accessible Field(s) to entire scene")]
