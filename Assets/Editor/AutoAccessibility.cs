@@ -12,6 +12,7 @@ public class AutoAccessibility
     [MenuItem("Tools/Add Accessible Field(s) to entire scene")]
     private static void AddFields(MenuCommand menuCommand)
     {
+    #if UNITY_EDITOR
         // Store GameObjects
         GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
         Renderer renderer;
@@ -79,11 +80,13 @@ public class AutoAccessibility
         }
         // Mark scene dirty to save changes to the scene
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+    #endif
     }
 
     [MenuItem("Tools/Remove Accessible Field(s) from entire scene")]
     private static void RemoveFields(MenuCommand menuCommand)
     {
+    #if UNITY_EDITOR
         // Store GameObjects
         GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
         // Iterate through each object
@@ -103,5 +106,6 @@ public class AutoAccessibility
         }
         // Mark scene dirty to save changes to the scene
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+    #endif
     }
 }
