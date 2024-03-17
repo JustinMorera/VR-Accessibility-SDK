@@ -9,17 +9,31 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
 * **Alt-Text Linting**: Checks for presence, completeness, and clarity among alt-text fields among GameObjects.
 
 ## Installation
+### Manual Installation:
 1. Download the Accessibility in VR Unity SDK from GitHub.
-2. Import the SDK package into your Unity project.
+2. Insert the SDK package files into your Unity project.
     a. Add the **'AccessibilityTags.cs'** script in the **/Scripts** folder to project's **/Scripts** folder.
     b. Add the editor scripts in the **/Editor** folder to project's **/Editor** folder.
     c. Add the **'ColorManager.cs'**, **'DoorHandler.cs'**, **'JoystickNav.cs'**, **'MenuManager.cs'**, **'PartialVis.cs'**, **'TeleportManager.cs'**, **'TimerHandler.cs'**, **'UI.cs'**, and **'WaypointHaptics.cs'** scripts in the **/Assets** folder to project's **/Assets** folder.
+    d. Add the **'Partial Vision Assistance Variant.prefab'** file to project's **/Assets** folder, then drag an instance of the prefab into the scene.
+
+### Install via Unity Package Manager import feature:
+1. Navigate to **'Window -> Package Manager'** using the tabs on the top of the Unity platform.
+2. In the Package Manager window, press the **'+'** icon on the top-left and press *'Add package from git URL...'* and enter this project's URL, *'https://github.com/JustinMorera/VR-Accessbility-SDK.git'*.
+3. The package will automatically install.
     
 ## Usage
-* Use **'Tools'/'Add Accessible Field(s) to entire scene'** command in upper Unity menu bar to add appropriate fields to all GameObjects in scene
-* Use **[RMB] -> 'Add Accessible Field(s)'** command to add fields to selected GameObject * *Will create separate buttons for each field*
-* Add an instance of the Partial Vision tool to scene*?*
-* Set up input command for Partial Vision tool*?*
+* Use **'Tools'/'Add Accessible Field(s) to entire scene'** command in upper Unity menu bar to add appropriate fields to all GameObjects in scene.
+* Use **[RMB] -> 'Add Accessible Field(s)'** command to add fields to selected GameObject * *Will create separate buttons for each field*.
+* To use Partial Vision Tool in scene:
+    1. Add an instance of the *Partial Vision Assistance* prefab tool to scene.
+    2. Set input command for Partial Vision tool using Unity's Input System. *Needs to be fleshed out*
+    3. Under *Partial Vision Assistance*'s *Partial Vis* script:
+        a. Select a Raycast Origin corresponding to the player's right-controller (recommended), or any other object.
+        b. Set an Input System button reference corresponding to the previously set input command.
+    4. Under *Partial Vision Assistance*'s *Menu Manager* script:
+        a. Select a Head corresponding to the player's camera viewpoint (recommended), or any other object.
+        b. Set Input System Display and Hide references corresponding to the previously set input command, or any other desired Input System references.
 
 ## Requirements
 * Unity's **'InputSystem'** and **'XR.Interaction'** modules must be installed to the scene in order for the Partial Vision Tool to function.
