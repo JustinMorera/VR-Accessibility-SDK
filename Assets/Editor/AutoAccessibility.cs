@@ -21,10 +21,8 @@ public class AutoAccessibility : Editor
         // Iterate through each object
         foreach (GameObject obj in objects)
         {
-            Debug.Log("Begin " + obj.name);
             if (obj != null)
             {
-                Debug.Log("1");
                 // Store object's AccessibilityTags script, if it exists
                 AccessibilityTags.AccessibilityTags script = obj.GetComponent<AccessibilityTags.AccessibilityTags>();
                 // If script exists, update altText to object's name
@@ -38,7 +36,6 @@ public class AutoAccessibility : Editor
                 collider = obj.GetComponent<MeshCollider>();
                 if (collider != null && collider.enabled == true)
                 {
-                    Debug.Log("2");
                     if (renderer != null)
                     {
                         string text = "This is a " + obj.name + ". ";
@@ -47,11 +44,9 @@ public class AutoAccessibility : Editor
                         Component[] components = obj.GetComponents<Component>();
                         foreach (Component component in components)
                         {
-                            Debug.Log("3: " + component);
                             if (component != null)
                             {
                                 Type type = component.GetType();
-                                Debug.Log("4");
                                 FieldInfo descriptionField = type.GetField("description", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy);
 
                                 if (descriptionField != null)
