@@ -34,9 +34,9 @@ public class AutoAccessibility : Editor
                 // Check if object exists and has a Collider and an active Renderer script attached
                 renderer = obj.GetComponent<Renderer>();
                 collider = obj.GetComponent<MeshCollider>();
-                if (collider != null)
+                if (collider != null && collider.enabled == true)
                 {
-                    if (renderer != null && renderer.enabled == true)
+                    if (renderer != null)
                     {
                         string text = "This is a " + obj.name + ". ";
 
