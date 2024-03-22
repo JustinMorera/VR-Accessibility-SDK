@@ -53,7 +53,6 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        menu.SetActive(false);
         //Initialize
         for(int i = 0;i<OtherUi.Length; i++){
             //Set up the wasActive Array
@@ -81,6 +80,7 @@ public class MenuManager : MonoBehaviour
         MenuOpen = false;
         MenuOptionSelected = false;
         
+        menu.SetActive(false);
 
         walls = GameObject.FindGameObjectsWithTag("Wall");
         inter = GameObject.FindGameObjectsWithTag("Interactable");
