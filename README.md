@@ -11,12 +11,13 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
 ## Installation
 ### Manual Installation:
 1. Download the Accessibility in VR Unity SDK from GitHub.
-2. Insert the SDK package files into your Unity project.
-    a. Add the **'AccessibilityTags.cs'** script in the **/Scripts** folder to project's **/Scripts** folder.
-    b. Add the editor scripts in the **/Editor** folder to project's **/Editor** folder.
-    c. Add the **'ColorManager.cs'**, **'DoorHandler.cs'**, **'JoystickNav.cs'**, **'MenuManager.cs'**, **'PartialVis.cs'**, **'TeleportManager.cs'**, **'TimerHandler.cs'**, **'UI.cs'**, and **'WaypointHaptics.cs'** scripts in the **/Assets** folder to project's **/Assets** folder.
-    d. Add the **'Partial Vision Assistance Variant.prefab'** file to project's **/Assets** folder, then drag an instance of the prefab into the scene.
-
+2. Insert the SDK package files into your Unity project:
+    a. Open project in Unity.
+    b. Right-click **/Packages** folder in lower menu's "Project" tab.
+    c. Select "Show in Explorer"
+    d. Add the **VR-Accessibility-SDK** folder to project's **/Packages** directory.
+    e. Allow Unity to reload the project.
+    
 ### Install via Unity Package Manager import feature:
 1. Navigate to **'Window -> Package Manager'** using the tabs on the top of the Unity platform.
 2. In the Package Manager window, press the **'+'** icon on the top-left and press *'Add package from git URL...'* and enter this project's URL, *'https://github.com/JustinMorera/VR-Accessbility-SDK.git'*.
