@@ -49,6 +49,7 @@ public class AutoAccessibility : Editor
                         {
                             Debug.Log("3: " + component);
                             Type type = component.GetType();
+                            Debug.Log("4");
                             FieldInfo descriptionField = type.GetField("description", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy);
 
                             if (descriptionField != null)
