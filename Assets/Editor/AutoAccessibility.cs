@@ -48,16 +48,19 @@ public class AutoAccessibility : Editor
                         foreach (Component component in components)
                         {
                             Debug.Log("3: " + component);
-                            Type type = component.GetType();
-                            Debug.Log("4");
-                            FieldInfo descriptionField = type.GetField("description", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy);
-
-                            if (descriptionField != null)
+                            if (component != null)
                             {
-                                string description = (string)descriptionField.GetValue(component);
-                                Debug.Log("Description found in component: " + obj.name + " - " + type.Name);
-                                text += description + " ";
-                                break;
+                                Type type = component.GetType();
+                                Debug.Log("4");
+                                FieldInfo descriptionField = type.GetField("description", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+
+                                if (descriptionField != null)
+                                {
+                                    string description = (string)descriptionField.GetValue(component);
+                                    Debug.Log("Description found in component: " + obj.name + " - " + type.Name);
+                                    text += description + " ";
+                                    break;
+                                }
                             }
                         }
                         // if (obj.interactable == true)
