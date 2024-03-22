@@ -12,9 +12,9 @@ public class MenuManager : MonoBehaviour
     public GameObject menu;
     public GameObject[] OtherUi;
     public bool[] wasActive;
-    public InputActionProperty showButton;
-    public InputActionProperty display;
-    public InputActionProperty hide;
+    public InputAction showButton;
+    public InputAction display;
+    public InputAction hide;
     public GameObject pvManager;
     public GameObject locomotion;
     public GameObject JoyNav;
@@ -35,6 +35,20 @@ public class MenuManager : MonoBehaviour
 
     private bool JoyLoaded;
     private bool MenuOptionSelected;
+
+    private void OnEnable()
+    {
+        showButton.Enable();
+        display.Enable();
+        hide.Enable();
+    }
+
+    private void OnDisable()
+    {
+        showButton.Disable();
+        display.Disable();
+        hide.Disable();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -85,7 +99,7 @@ public class MenuManager : MonoBehaviour
             }
         }
 
-        if(showButton.action.WasPressedThisFrame() || MenuOptionSelected){
+        if(showButton.triggered || MenuOptionSelected){
             
             //If the menu is closed upon button press
             if(!menu.activeSelf){
@@ -176,9 +190,9 @@ public class MenuManager : MonoBehaviour
                 MenuOptionSelected = false;
             }
             menu.SetActive(!menu.activeSelf);
-        } else if(display.action.WasPerformedThisFrame() && !menu.activeSelf){
+        } else if(display.triggered && !menu.activeSelf){
             menu.SetActive(true);
-        } else if(hide.action.WasPerformedThisFrame()){
+        } else if(hide.triggered){
             menu.SetActive(false);
         }
 
