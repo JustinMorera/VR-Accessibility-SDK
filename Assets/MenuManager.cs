@@ -108,7 +108,7 @@ public class MenuManager : MonoBehaviour
                     //Debug.Log("Joy Loaded");
                 }
                 else   
-                    Debug.Log("Sumthin Fucked Up");
+                    Debug.Log("Sumthin messed Up");
 
             
                 foreach(GameObject collider in walls){
