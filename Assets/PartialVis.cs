@@ -13,7 +13,7 @@ using AccessibilityTags;
 public class PartialVis : MonoBehaviour
 {   
     public Transform raycastOrigin;
-    public InputActionProperty button;
+    public InputAction button;
 
     public TextMeshProUGUI interactable;
     public TextMeshProUGUI details;
@@ -24,6 +24,16 @@ public class PartialVis : MonoBehaviour
 
     AccessibilityTags.AccessibilityTags tags;
     string objectName;
+
+    private void OnEnable()
+    {
+        button.Enable();
+    }
+
+    private void OnDisable()
+    {
+        button.Disable();
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -35,7 +45,7 @@ public class PartialVis : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(button.action.WasPressedThisFrame()){
+        if(button.triggered){
             Scan();
         }
     }
