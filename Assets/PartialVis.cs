@@ -27,7 +27,7 @@ public class PartialVis : MonoBehaviour
     [Header("Text-to-Speech")]
     [SerializeField] private bool ttsEnabled = true;
     [SerializeField] private TTSSpeaker ttsSpeaker;
-    private Assets.VisionReader visionReader;
+    private VisionReader visionReader;
 
     AccessibilityTags.AccessibilityTags tags;
     string objectName;

@@ -44,6 +44,8 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
         3. In the Package Manager window, navigate to the **"Packages: ..."** drop down menu and select **"Unity Registry"**.
         4. Navigate to **"Input System"** or **"XR Interaction Toolkit"** package.
         5. If the package is not installed, click on the "Install" button next to it to install it into the project.
+* Oculus Voice SDK must be installed to the scene in order for the Text-to-Speech functionality to take effect.
+    * 
 
 ## License
 ?
