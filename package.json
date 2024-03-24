@@ -10,7 +10,7 @@
   "licensesUrl": "",
   "dependencies": {
     "com.unity.inputsystem": "1.4.4",
-    "com.unity.xr.interaction.toolkit": "2.0.4",
+    "com.unity.xr.interaction.toolkit": "2.0.4"
  },
  "keywords": [
     "VR",
