@@ -11,7 +11,7 @@
   "dependencies": {
     "com.unity.inputsystem": "1.4.4",
     "com.unity.xr.interaction.toolkit": "2.0.4",
-    "com.meta.xr.sdk.voice": "~1.0.0"
+    "com.meta.xr.sdk.voice": ">=59.0.0"
  },
  "keywords": [
     "VR",
