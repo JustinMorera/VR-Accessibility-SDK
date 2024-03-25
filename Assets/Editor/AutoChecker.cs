@@ -32,7 +32,9 @@ using System.Text.RegularExpressions;
 // Emmanuelle
 public class AutoChecker : Editor
 {
-    public override void OnInspectorGUI()
+    // Right-click option for GameObjects
+    [MenuItem("Tools/Check Alt-Text")]
+    private static void check(MenuCommand menuCommand)
     {
         // Draws the built-in inspector
         DrawDefaultInspector();
