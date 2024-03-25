@@ -46,6 +46,7 @@ public class PartialVis : MonoBehaviour
     void Update()
     {
         if(button.triggered){
+            Debug.Log("Activated!");
             Scan();
         }
     }
