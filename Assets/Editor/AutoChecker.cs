@@ -24,6 +24,8 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using AccessibilityTags;     
 using static AutoAccessibility;
+using System;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 // Editor script that Adds AltText to ALL GameObjects
@@ -37,7 +39,7 @@ public class AutoChecker : Editor
     private static void check(MenuCommand menuCommand)
     {
         // Draws the built-in inspector
-        DrawDefaultInspector();
+        //DrawDefaultInspector();
 
         // If game object has renderer
         GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
