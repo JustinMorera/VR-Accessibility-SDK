@@ -169,7 +169,7 @@ public class AutoChecker : Editor
     //}
 
     // check for duplicate alt text and duplicate object names
-    void CheckForDuplicateAltText(GameObject obj, AccessibilityTags.AccessibilityTags script)
+    private static void CheckForDuplicateAltText(GameObject obj, AccessibilityTags.AccessibilityTags script)
     {
         GameObject[] objectsInScene = GameObject.FindObjectsOfType<GameObject>();
         string nameWithoutNumber1 = RemoveNumberAtEnd(obj.name); // for later comparison
