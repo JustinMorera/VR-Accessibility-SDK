@@ -96,6 +96,20 @@ public class AutoChecker : Editor
                                             Debug.LogWarning("Alt Text is one word for " + obj.name + ".");
                                         }
                                     }
+
+                                    // Object name warnings
+                                    if (obj.name.Contains(" ") || obj.name.Contains("_")) // object name is more than one word
+                                    {
+                                        Debug.Log("Object Name is more than one word for " + obj.name);
+                                    }
+                                    else // object name is one word
+                                    {
+                                        // EditorGUILayout.HelpBox("Object Name is one word. While not necessary, it is recommended you make it more descriptive.", MessageType.Info);
+                                        Debug.LogWarning(obj.name + " is one word. While not necessary, it is recommended you make it more descriptive.");
+                                    }
+
+                            // Checks for duplicated object names
+                            CheckForDuplicateAltText(obj, script);
                                 }
                                 else // there should be alt text
                                 {
@@ -103,21 +117,11 @@ public class AutoChecker : Editor
                                     Debug.LogWarning(obj.name + " needs alt text!");
                                 }
                             }
+                            else // there should be an AccessibilityTags script
+                            {
+                                Debug.LogWarning(obj.name + " needs an AccessibilityTags script!");
+                            }
                             
-
-                            // Object name warnings
-                            if (obj.name.Contains(" ") || obj.name.Contains("_")) // object name is more than one word
-                            {
-                                Debug.Log("Object Name is more than one word for " + obj.name);
-                            }
-                            else // object name is one word
-                            {
-                                // EditorGUILayout.HelpBox("Object Name is one word. While not necessary, it is recommended you make it more descriptive.", MessageType.Info);
-                                Debug.LogWarning(obj.name + " is one word. While not necessary, it is recommended you make it more descriptive.");
-                            }
-
-                            // Checks for duplicated object names
-                            CheckForDuplicateAltText(obj, script);
                         }
                         // else
                         // {
