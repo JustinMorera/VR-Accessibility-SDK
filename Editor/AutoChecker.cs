@@ -43,7 +43,10 @@ public class AutoChecker : Editor
             // If game object has renderer
             GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
             Renderer renderer;
-            MeshCollider collider;
+            MeshCollider colliderMesh;
+            BoxCollider colliderBox;
+            SphereCollider colliderSphere;
+            CapsuleCollider colliderCapsule;
 
             foreach (GameObject obj in objects)
             {
@@ -62,8 +65,11 @@ public class AutoChecker : Editor
 
                     // Check if object exists and has an active Collider and a Renderer script attached
                     renderer = obj.GetComponent<Renderer>();
-                    collider = obj.GetComponent<MeshCollider>();
-                    if (collider != null && collider.enabled == true)
+                    colliderMesh = obj.GetComponent<MeshCollider>();
+                    colliderBox = obj.GetComponent<BoxCollider>();
+                    colliderSphere = obj.GetComponent<SphereCollider>();
+                    colliderCapsule = obj.GetComponent<CapsuleCollider>();
+                    if ((colliderMesh != null && colliderMesh.enabled == true) || (colliderBox != null && colliderBox.enabled == true) || (colliderSphere != null && colliderSphere.enabled == true) || (colliderCapsule != null && colliderCapsule.enabled == true))
                     {
                         if (renderer != null)
                         {
@@ -100,7 +106,7 @@ public class AutoChecker : Editor
                             
 
                             // Object name warnings
-                            if (obj.name.Contains(" ")) // object name is more than one word
+                            if (obj.name.Contains(" ") || obj.name.Contains("_")) // object name is more than one word
                             {
                                 Debug.Log("Object Name is more than one word for " + obj.name);
                             }
@@ -118,7 +124,7 @@ public class AutoChecker : Editor
                         //     Debug.Log("no active renderer");
                         // }
                     }
-                    else
+                    // else
                     // {
                     //     Debug.Log("no active collider");
                     // }
