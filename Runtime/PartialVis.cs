@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Meta.WitAi.TTS.Utilities;
 using TMPro;
 using AccessibilityTags;
 
@@ -21,6 +22,11 @@ public class PartialVis : MonoBehaviour
 
     [SerializeField] Color32 trueColor;
     [SerializeField] Color32 falseColor;
+
+    [Header("Text-to-Speech")]
+    [SerializeField] private bool ttsEnabled = true, speakAfterMenuClose = false;
+    [SerializeField] private TTSSpeaker ttsSpeaker;
+    private Assets.VisionReader visionReader;
 
     AccessibilityTags.AccessibilityTags tags;
     string objectName;
@@ -85,6 +91,11 @@ public class PartialVis : MonoBehaviour
 
                 details.text = tags.AltText + "\n";
                 obj_name.text = objectName;
+
+                if (ttsEnabled)
+                {
+                    visionReader.StartReading(tags.AltText);
+                }
             } 
             else if (hit.collider.gameObject.GetComponent<UnityEngine.Object>() != null)
             {
@@ -139,5 +150,9 @@ public class PartialVis : MonoBehaviour
         return;
     }
     
+    public void StopReading()
+    {
+        if (!speakAfterMenuClose) ttsSpeaker.Stop();
+    }
 }
 
