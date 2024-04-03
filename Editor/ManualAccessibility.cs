@@ -15,7 +15,7 @@ public class ManualAccessibility : Editor
     {
         // Store selected GameObject
         GameObject selectedObject = menuCommand.context as GameObject;
-        // Check if object exists and has a Mesh Collider script attached (may not be necessary for manual addition of tags by devs)
+        // Check if object exists and has a Collider script attached (may not be necessary for manual addition of tags by devs)
         if (selectedObject != null)
         {
             string text = "This is a " + selectedObject.name + ". ";

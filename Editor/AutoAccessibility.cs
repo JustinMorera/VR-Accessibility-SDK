@@ -17,7 +17,7 @@ public class AutoAccessibility : Editor
         // Store GameObjects
         GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
         Renderer renderer;
-        MeshCollider collider;
+        Collider collider;
         // Iterate through each object
         foreach (GameObject obj in objects)
         {
@@ -33,7 +33,7 @@ public class AutoAccessibility : Editor
                 }
                 // Check if object exists and has an active Collider and a Renderer script attached
                 renderer = obj.GetComponent<Renderer>();
-                collider = obj.GetComponent<MeshCollider>();
+                collider = obj.GetComponent<Collider>();
                 if (collider != null && collider.enabled == true)
                 {
                     if (renderer != null)
@@ -76,7 +76,7 @@ public class AutoAccessibility : Editor
                 }
                 else
                 {
-                    Debug.Log("Failed to add Alt Text to " + obj.name + " (selected object may not have a Mesh Collider)");
+                    Debug.Log("Failed to add Alt Text to " + obj.name + " (selected object may not have a Collider)");
                 }
                 // Mark selected GameObject as dirty to save changes
                 EditorUtility.SetDirty(obj);
