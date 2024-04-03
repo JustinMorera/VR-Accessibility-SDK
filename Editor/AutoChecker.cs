@@ -43,10 +43,11 @@ public class AutoChecker : Editor
             // If game object has renderer
             GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
             Renderer renderer;
-            MeshCollider colliderMesh;
-            BoxCollider colliderBox;
-            SphereCollider colliderSphere;
-            CapsuleCollider colliderCapsule;
+            // MeshCollider colliderMesh;
+            // BoxCollider colliderBox;
+            // SphereCollider colliderSphere;
+            // CapsuleCollider colliderCapsule;
+            Collider collider;
 
             foreach (GameObject obj in objects)
             {
@@ -65,16 +66,35 @@ public class AutoChecker : Editor
 
                     // Check if object exists and has an active Collider and a Renderer script attached
                     renderer = obj.GetComponent<Renderer>();
-                    colliderMesh = obj.GetComponent<MeshCollider>();
-                    colliderBox = obj.GetComponent<BoxCollider>();
-                    colliderSphere = obj.GetComponent<SphereCollider>();
-                    colliderCapsule = obj.GetComponent<CapsuleCollider>();
-                    if ((colliderMesh != null && colliderMesh.enabled == true) || (colliderBox != null && colliderBox.enabled == true) || (colliderSphere != null && colliderSphere.enabled == true) || (colliderCapsule != null && colliderCapsule.enabled == true))
+                    // colliderMesh = obj.GetComponent<MeshCollider>();
+                    // colliderBox = obj.GetComponent<BoxCollider>();
+                    // colliderSphere = obj.GetComponent<SphereCollider>();
+                    // colliderCapsule = obj.GetComponent<CapsuleCollider>();
+                    collider = obj.GetComponent<Collider>();
+                    // if ((colliderMesh != null && colliderMesh.enabled == true) || (colliderBox != null && colliderBox.enabled == true) || (colliderSphere != null && colliderSphere.enabled == true) || (colliderCapsule != null && colliderCapsule.enabled == true))
+                    if (collider != null && collider.enabled == true)
                     {
                         if (renderer != null)
                         {
+                            // Object name warnings
+                            if (obj.name.Contains(" ") || obj.name.Contains("_")) // object name is more than one word
+                            {
+                                Debug.Log("Object Name is more than one word for " + obj.name);
+                            }
+                            else // object name is one word
+                            {
+                                // EditorGUILayout.HelpBox("Object Name is one word. While not necessary, it is recommended you make it more descriptive.", MessageType.Info);
+                                Debug.LogWarning(obj.name + " is one word. While not necessary, it is recommended you make the name more descriptive.");
+                            }
+
+                            // Checks for duplicated object names
+                            CheckForDuplicateAltText(obj, script);
+                            CheckForDuplicateName(obj);
+
+                            // Check if object has AccessibilityTags script
                             if (script != null)
                             {
+                                // Check if object has alt text
                                 if (script.AltText != null)
                                 {
                                     // If alt text is empty
@@ -97,19 +117,12 @@ public class AutoChecker : Editor
                                         }
                                     }
 
-                                    // Object name warnings
-                                    if (obj.name.Contains(" ") || obj.name.Contains("_")) // object name is more than one word
+                                    // Check if alt text is sufficient
+                                    string firstSentence = "This is a " + obj.name + ". ";
+                                    if (script.AltText.Equals(firstSentence))
                                     {
-                                        Debug.Log("Object Name is more than one word for " + obj.name);
+                                        Debug.LogWarning("Alt text too short for " + obj.name + ". Please add a description.");
                                     }
-                                    else // object name is one word
-                                    {
-                                        // EditorGUILayout.HelpBox("Object Name is one word. While not necessary, it is recommended you make it more descriptive.", MessageType.Info);
-                                        Debug.LogWarning(obj.name + " is one word. While not necessary, it is recommended you make it more descriptive.");
-                                    }
-
-                            // Checks for duplicated object names
-                            CheckForDuplicateAltText(obj, script);
                                 }
                                 else // there should be alt text
                                 {
@@ -198,17 +211,36 @@ public class AutoChecker : Editor
             {
                 AccessibilityTags.AccessibilityTags otherScript = otherObj.GetComponent<AccessibilityTags.AccessibilityTags>();
                 //check for duplicate alt-text
-                if (otherScript != null && script.AltText == otherScript.AltText)
+                if (otherScript != null && script.AltText == otherScript.AltText && script.AltText != "" && otherScript.AltText != "")
                 {
                     //EditorGUILayout.HelpBox("Duplicate alt text found. Please check if these objects should be differentiated more.", MessageType.Info);
-                    Debug.LogWarning("Duplicate altText found for objects: " + obj.name + " and " + otherObj.name);
+                    Debug.LogWarning("Duplicate altText found for objects: " + obj.name + " and " + otherObj.name + ". Please check if these objects should be differentiated more.");
                 }
 
+            }
+            else
+            {
+                continue;
+            }
+
+            // EditorUtility.SetDirty(otherObj);
+        }
+    }
+
+    private static void CheckForDuplicateName(GameObject obj)
+    {
+        GameObject[] objectsInScene = GameObject.FindObjectsOfType<GameObject>();
+        string nameWithoutNumber1 = RemoveNumberAtEnd(obj.name); // for later comparison
+
+        foreach (GameObject otherObj in objectsInScene)
+        {
+            if (otherObj != obj)
+            {
                 //check for duplicate object names
                 if (obj.name == otherObj.name)
                 {
                     //EditorGUILayout.HelpBox("Duplicate Object Names found. Please check if these objects should be differentiated more.", MessageType.Info);
-                    Debug.LogWarning("Duplicate name found for objects with name: " + obj.name);
+                    Debug.LogWarning("Duplicate name found for objects with name: " + obj.name + ". Please check if these objects should be differentiated more.");
                     continue;
                 }
 
@@ -220,8 +252,10 @@ public class AutoChecker : Editor
                 if (compareNames == true) // these are considered duplicates still
                 {
                     //EditorGUILayout.HelpBox("Duplicate Object Names found. Please check if these objects should be differentiated more.", MessageType.Info);
-                    Debug.LogWarning("Duplicate name found for objects with name: " + obj.name);
+                    Debug.LogWarning("Duplicate name found for objects with name: " + obj.name + ". Please check if these objects should be differentiated more.");
                 }
+
+                // compare duplicates ending in numbers within parentheses
             }
             else
             {
