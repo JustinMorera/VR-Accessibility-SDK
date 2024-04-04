@@ -13,9 +13,10 @@ public class ManualAccessibility : Editor
     [MenuItem("GameObject/Add Accessible Field(s)")]
     private static void AddField(MenuCommand menuCommand)
     {
+        Rigidbody rigidbody;
         // Store selected GameObject
         GameObject selectedObject = menuCommand.context as GameObject;
-        // Check if object exists and has a Collider script attached (may not be necessary for manual addition of tags by devs)
+        // Check if object exists
         if (selectedObject != null)
         {
             string text = "This is a " + selectedObject.name + ". ";
@@ -39,17 +40,24 @@ public class ManualAccessibility : Editor
             // Store object's AccessibilityTags script, if it exists
             AccessibilityTags.AccessibilityTags script = selectedObject.GetComponent<AccessibilityTags.AccessibilityTags>();
             // If script exists, update altText to object's name
-            if (script != null)
-            {
-                script.AltText = text;
-                Debug.Log("Alt Text successfully updated for " + selectedObject.name);
-            }
-            else // Otherwise, add altText as object's name
+            if (script == null)
             {
                 script = Undo.AddComponent<AccessibilityTags.AccessibilityTags>(selectedObject);
-                script.AltText = text;
-                Debug.Log("Alt Text successfully added to " + selectedObject.name);
             }
+            script.AltText = text;
+            Debug.Log("Alt Text successfully added to " + selectedObject.name);
+
+            rigidbody = obj.GetComponent<Rigidbody>();
+            // Check if object has a Rigidbody script attached for interactibility
+            if (rigidbody != null && rigidbody.isKinematic == false) // If isKinematic is false, object can be picked up/manipulated
+            {
+                script.Interactable = true;
+            }
+            else
+            {
+                script.Interactable = false;
+            }
+        
             // Mark selected GameObject as dirty to save changes
             EditorUtility.SetDirty(selectedObject);
             // Mark scene dirty to save changes to the scene

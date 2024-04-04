@@ -8,11 +8,18 @@ namespace AccessibilityTags
     {
         [SerializeField]
         private string altText;
+        private bool interactable
 
         public string AltText
         {
             get{ return altText; }
             set{ altText = value; }
+        }
+
+        public bool Interactable
+        {
+            get{ return interactable; }
+            set{ interactable = value; }
         }
     }
 }

@@ -18,9 +18,10 @@ public class AutoAccessibility : Editor
         GameObject[] objects = GameObject.FindObjectsOfType<GameObject>();
         Renderer renderer;
         Collider collider;
+        Rigidbody rigidbody;
         // Iterate through each object
         foreach (GameObject obj in objects)
-        {
+        {   // Check if object exists
             if (obj != null)
             {
                 // Store object's AccessibilityTags script, if it exists
@@ -31,9 +32,9 @@ public class AutoAccessibility : Editor
                     script = Undo.AddComponent<AccessibilityTags.AccessibilityTags>(obj);
                     Debug.Log("Alt Text successfully added to " + obj.name);
                 }
-                // Check if object exists and has an active Collider and a Renderer script attached
-                renderer = obj.GetComponent<Renderer>();
+                // Check if object has an active Collider and a Renderer script attached
                 collider = obj.GetComponent<Collider>();
+                renderer = obj.GetComponent<Renderer>();
                 if (collider != null && collider.enabled == true)
                 {
                     if (renderer != null)
@@ -77,6 +78,17 @@ public class AutoAccessibility : Editor
                 else
                 {
                     Debug.Log("Failed to add Alt Text to " + obj.name + " (selected object may not have a Collider)");
+                }
+
+                rigidbody = obj.GetComponent<Rigidbody>();
+                // Check if object has a Rigidbody script attached for interactibility
+                if (rigidbody != null && rigidbody.isKinematic == false) // If isKinematic is false, object can be picked up/manipulated
+                {
+                    script.Interactable = true;
+                }
+                else
+                {
+                    script.Interactable = false;
                 }
                 // Mark selected GameObject as dirty to save changes
                 EditorUtility.SetDirty(obj);
