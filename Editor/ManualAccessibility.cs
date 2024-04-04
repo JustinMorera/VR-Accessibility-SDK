@@ -47,7 +47,7 @@ public class ManualAccessibility : Editor
             script.AltText = text;
             Debug.Log("Alt Text successfully added to " + selectedObject.name);
 
-            rigidbody = obj.GetComponent<Rigidbody>();
+            rigidbody = selectedObject.GetComponent<Rigidbody>();
             // Check if object has a Rigidbody script attached for interactibility
             if (rigidbody != null && rigidbody.isKinematic == false) // If isKinematic is false, object can be picked up/manipulated
             {
