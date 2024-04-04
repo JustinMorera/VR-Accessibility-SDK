@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
+
 public class MenuManager : MonoBehaviour
 {   
     public Transform head;
@@ -192,12 +193,9 @@ public class MenuManager : MonoBehaviour
             }
             menu.SetActive(!menu.activeSelf);
         } else if(display.triggered && !menu.activeSelf){
-            Debug.Log("Display pressed");
             menu.SetActive(true);
         } else if(hide.triggered){
-            Debug.Log("Hide pressed");
             menu.SetActive(false);
-            // pv.StopReading();
         }
 
         
