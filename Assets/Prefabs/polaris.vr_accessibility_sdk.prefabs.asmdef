@@ -1,3 +1,6 @@
 {
-	"name": "polaris.vr_accessibility_sdk.prefabs"
+	"name": "polaris.vr_accessibility_sdk.prefabs",
+	"references": [
+		"polaris.vr_accessibility_sdk.assets"
+	]
 }
