@@ -8,7 +8,8 @@ namespace AccessibilityTags
     {
         [SerializeField]
         private string altText;
-        private bool interactable
+        [SerializeField]
+        private bool interactable;
 
         public string AltText
         {
