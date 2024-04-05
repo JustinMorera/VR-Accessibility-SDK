@@ -219,7 +219,6 @@ public class AutoChecker : Editor
                 {
                     //EditorGUILayout.HelpBox("Duplicate alt text found. Please check if these objects should be differentiated more.", MessageType.Info);
                     Debug.LogWarning("Duplicate altText found for objects: " + obj.name + " and " + otherObj.name + ". Please check if these objects should be differentiated more.");
-                    SetDirty(otherObj);
                 }
 
             }
