@@ -25,7 +25,9 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
     
 ## Usage
 * Use **'Tools'/'Add Accessible Field(s) to entire scene'** command in upper Unity menu bar to add appropriate fields to all GameObjects in scene.
-* Use **[RMB] -> 'Add Accessible Field(s)'** command to add fields to selected GameObject * *Will create separate buttons for each field*.
+* Use **'Tools'/'Check Alt-Text'** command in upper Unity menu bar to Alt-Text of all GameObjects in scene for completeness and redundancy.
+* Use **'Tools'/'Remove Accessible Field(s) from entire scene'** command in upper Unity menu bar to remove all fields from all GameObjects in scene.
+* Use **[RMB] -> 'Add Accessible Field(s)'** command to add fields to selected GameObject
 * To use Partial Vision Tool in scene:
     1. Add an instance of the *Partial Vision Assistance* prefab tool to scene.
     2. Set input command for Partial Vision tool using Unity's Input System.
