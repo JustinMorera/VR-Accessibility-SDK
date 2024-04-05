@@ -91,6 +91,7 @@ public class PartialVis : MonoBehaviour
 
                 details.text = tags.AltText + "\n";
                 obj_name.text = objectName;
+                interactable.text = tags.Interactable.ToString();
 
                 // if (ttsEnabled)
                 // {
