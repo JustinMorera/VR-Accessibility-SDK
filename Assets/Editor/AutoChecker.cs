@@ -203,11 +203,15 @@ public class AutoChecker : Editor
     private static void CheckForDuplicateAltText(GameObject obj, AccessibilityTags.AccessibilityTags script)
     {
         GameObject[] objectsInScene = GameObject.FindObjectsOfType<GameObject>();
-        string nameWithoutNumber1 = RemoveNumberAtEnd(obj.name); // for later comparison
+        Renderer renderer;
+        Collider collider;
 
         foreach (GameObject otherObj in objectsInScene)
         {
-            if (otherObj != obj)
+            renderer = otherObj.GetComponent<Renderer>();
+            collider = otherObj.GetComponent<Collider>();
+
+            if (otherObj != obj && otherObj != null && renderer != null && collider != null && collider.enabled == true)
             {
                 AccessibilityTags.AccessibilityTags otherScript = otherObj.GetComponent<AccessibilityTags.AccessibilityTags>();
                 //check for duplicate alt-text
@@ -215,6 +219,7 @@ public class AutoChecker : Editor
                 {
                     //EditorGUILayout.HelpBox("Duplicate alt text found. Please check if these objects should be differentiated more.", MessageType.Info);
                     Debug.LogWarning("Duplicate altText found for objects: " + obj.name + " and " + otherObj.name + ". Please check if these objects should be differentiated more.");
+                    SetDirty(otherObj);
                 }
 
             }
@@ -231,10 +236,15 @@ public class AutoChecker : Editor
     {
         GameObject[] objectsInScene = GameObject.FindObjectsOfType<GameObject>();
         string nameWithoutNumber1 = RemoveNumberAtEnd(obj.name); // for later comparison
+        Renderer renderer;
+        Collider collider;
 
         foreach (GameObject otherObj in objectsInScene)
         {
-            if (otherObj != obj)
+            renderer = otherObj.GetComponent<Renderer>();
+            collider = otherObj.GetComponent<Collider>();
+
+            if (otherObj != obj && otherObj != null && renderer != null && collider != null && collider.enabled == true)
             {
                 //check for duplicate object names
                 if (obj.name == otherObj.name)
