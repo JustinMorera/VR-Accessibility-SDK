@@ -25,6 +25,7 @@ using UnityEngine;
 using AccessibilityTags;     
 //using static AutoAccessibility;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 // Editor script that Adds AltText to ALL GameObjects
 [CustomEditor(typeof(GameObject))]
@@ -32,10 +33,13 @@ using System.Text.RegularExpressions;
 // Emmanuelle
 public class AutoChecker : Editor
 {
+    private static List<string> duplicateNames = new List<string>();
+    private static List<GameObject> duplicateAltText = new List<GameObject>();
     // Right-click option for GameObjects
     [MenuItem("Tools/Check Alt-Text")]
     private static void check(MenuCommand menuCommand)
     {
+
         //#if UNITY_EDITOR
             // Draws the built-in inspector
             // DrawDefaultInspector();
@@ -48,6 +52,7 @@ public class AutoChecker : Editor
             // SphereCollider colliderSphere;
             // CapsuleCollider colliderCapsule;
             Collider collider;
+            
 
             foreach (GameObject obj in objects)
             {
@@ -88,8 +93,8 @@ public class AutoChecker : Editor
                             }
 
                             // Checks for duplicated object names
-                            CheckForDuplicateAltText(obj, script);
                             CheckForDuplicateName(obj);
+                            CheckForDuplicateAltText(obj, script);
 
                             // Check if object has AccessibilityTags script
                             if (script != null)
@@ -149,6 +154,11 @@ public class AutoChecker : Editor
                     EditorUtility.SetDirty(obj);
                 }
             }
+
+            // clear lists
+            duplicateNames.Clear();
+            duplicateAltText.Clear();
+            
         //#endif
     }
 
@@ -211,14 +221,21 @@ public class AutoChecker : Editor
             renderer = otherObj.GetComponent<Renderer>();
             collider = otherObj.GetComponent<Collider>();
 
-            if (otherObj != obj && otherObj != null && renderer != null && collider != null && collider.enabled == true)
+            if (otherObj != obj && otherObj != null && renderer != null && collider != null && collider.enabled == true && !duplicateAltText.Contains(otherObj) && !duplicateAltText.Contains(obj))
             {
                 AccessibilityTags.AccessibilityTags otherScript = otherObj.GetComponent<AccessibilityTags.AccessibilityTags>();
+                
                 //check for duplicate alt-text
                 if (otherScript != null && script.AltText == otherScript.AltText && script.AltText != "" && otherScript.AltText != "")
                 {
                     //EditorGUILayout.HelpBox("Duplicate alt text found. Please check if these objects should be differentiated more.", MessageType.Info);
-                    Debug.LogWarning("Duplicate altText found for objects: " + obj.name + " and " + otherObj.name + ". Please check if these objects should be differentiated more.");
+                    Debug.LogWarning("Duplicate alt text found for objects: " + obj.name + " and " + otherObj.name + ". Please check if these objects should be differentiated more.");
+                    duplicateAltText.Add(otherObj);
+
+                    if (!duplicateAltText.Contains(obj))
+                    {
+                        duplicateAltText.Add(obj);
+                    }
                 }
 
             }
@@ -226,15 +243,14 @@ public class AutoChecker : Editor
             {
                 continue;
             }
-
-            // EditorUtility.SetDirty(otherObj);
         }
     }
 
     private static void CheckForDuplicateName(GameObject obj)
     {
         GameObject[] objectsInScene = GameObject.FindObjectsOfType<GameObject>();
-        string nameWithoutNumber1 = RemoveNumberAtEnd(obj.name); // for later comparison
+        string nameWithoutNumber1 = RemoveNumberAtEnd(obj.name); // to compare if it ends in a number
+        string nameWithoutNumber2 = RemoveNumberInParentheses(obj.name); // taking into account numbers in parentheses
         Renderer renderer;
         Collider collider;
 
@@ -243,28 +259,32 @@ public class AutoChecker : Editor
             renderer = otherObj.GetComponent<Renderer>();
             collider = otherObj.GetComponent<Collider>();
 
-            if (otherObj != obj && otherObj != null && renderer != null && collider != null && collider.enabled == true)
+            if (otherObj != obj && otherObj != null && renderer != null && collider != null && collider.enabled == true && !duplicateNames.Contains(nameWithoutNumber1) && !duplicateNames.Contains(nameWithoutNumber2))
             {
                 //check for duplicate object names
                 if (obj.name == otherObj.name)
                 {
                     //EditorGUILayout.HelpBox("Duplicate Object Names found. Please check if these objects should be differentiated more.", MessageType.Info);
                     Debug.LogWarning("Duplicate name found for objects with name: " + obj.name + ". Please check if these objects should be differentiated more.");
+                    duplicateNames.Add(nameWithoutNumber1);
                     continue;
                 }
 
                 // duplicate object names with numbers at the end
-                string nameWithoutNumber2 = RemoveNumberAtEnd(otherObj.name); // to compare with obj
+                string nameWithoutNumber3 = RemoveNumberAtEnd(otherObj.name); // to compare with obj
+                string nameWithoutNumber4 = RemoveNumberInParentheses(otherObj.name); // to compare with obj
+                
                 // compare 2 objects with numbers at the end of the object names
-                bool compareNames = String.Equals(nameWithoutNumber1, nameWithoutNumber2, StringComparison.OrdinalIgnoreCase);
+                bool compareNames1 = String.Equals(nameWithoutNumber1, nameWithoutNumber3, StringComparison.OrdinalIgnoreCase);
+                bool compareNames2 = String.Equals(nameWithoutNumber2, nameWithoutNumber4, StringComparison.OrdinalIgnoreCase);
 
-                if (compareNames == true) // these are considered duplicates still
+                if (compareNames1 == true || compareNames2 == true) // these are considered duplicates still
                 {
                     //EditorGUILayout.HelpBox("Duplicate Object Names found. Please check if these objects should be differentiated more.", MessageType.Info);
                     Debug.LogWarning("Duplicate name found for objects with name: " + obj.name + ". Please check if these objects should be differentiated more.");
+                    duplicateNames.Add(nameWithoutNumber1);
                 }
 
-                // compare duplicates ending in numbers within parentheses
             }
             else
             {
@@ -277,6 +297,13 @@ public class AutoChecker : Editor
     {
         // Removes number at the end of a string to check for duplicate objects
         string pattern = @"\d+$";
+        return Regex.Replace(name, pattern, "");
+    }
+
+    private static string RemoveNumberInParentheses(string name)
+    {
+        // Removes number in parentheses at the end of the string to check for duplicate objects
+        string pattern = @" \(\d+\)$";
         return Regex.Replace(name, pattern, "");
     }
 }
