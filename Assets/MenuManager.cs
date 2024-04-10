@@ -196,6 +196,7 @@ public class MenuManager : MonoBehaviour
             menu.SetActive(true);
         } else if(hide.triggered){
             menu.SetActive(false);
+            pv.StopReading();
         }
 
         

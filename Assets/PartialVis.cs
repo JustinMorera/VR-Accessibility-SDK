@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-// using Meta.WitAi.TTS.Utilities;
+using Meta.WitAi.TTS.Utilities;
 using TMPro;
 using AccessibilityTags;
 
@@ -23,10 +23,10 @@ public class PartialVis : MonoBehaviour
     [SerializeField] Color32 trueColor;
     [SerializeField] Color32 falseColor;
 
-    // [Header("Text-to-Speech")]
-    // [SerializeField] private bool ttsEnabled = true, speakAfterMenuClose = false;
-    // [SerializeField] private TTSSpeaker ttsSpeaker;
-    // private Assets.VisionReader visionReader;
+    [Header("Text-to-Speech")]
+    [SerializeField] private bool ttsEnabled = true, speakAfterMenuClose = false;
+    [SerializeField] private TTSSpeaker ttsSpeaker;
+    private Assets.VisionReader visionReader;
 
     AccessibilityTags.AccessibilityTags tags;
     string objectName;
@@ -93,10 +93,10 @@ public class PartialVis : MonoBehaviour
                 obj_name.text = objectName;
                 interactable.text = tags.Interactable.ToString();
 
-                // if (ttsEnabled)
-                // {
-                //     visionReader.StartReading(tags.AltText);
-                // }
+                if (ttsEnabled)
+                {
+                    visionReader.StartReading(tags.AltText);
+                }
             } 
             else if (hit.collider.gameObject.GetComponent<UnityEngine.Object>() != null)
             {
@@ -151,9 +151,9 @@ public class PartialVis : MonoBehaviour
         return;
     }
     
-// public void StopReading()
-//     {
-//         if (!speakAfterMenuClose) ttsSpeaker.Stop();
-//     }
+public void StopReading()
+    {
+        if (!speakAfterMenuClose) ttsSpeaker.Stop();
+    }
 }
 
