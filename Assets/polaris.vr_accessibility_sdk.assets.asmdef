@@ -2,6 +2,7 @@
     "name": "Assets",
     "rootNamespace": "",
     "references": [
+        "Meta.WitAi.TTS.Utilities",
         "GUID:b0ff5371edfc5a54985ec34c5063b5f8",
         "GUID:fe685ec1767f73d42b749ea8045bfe43",
         "GUID:75469ad4d38634e559750d17036d5f7c",
