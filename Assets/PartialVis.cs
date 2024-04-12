@@ -46,6 +46,8 @@ public class PartialVis : MonoBehaviour
     {
         trueColor = Color.green;
         falseColor = Color.red;
+
+        visionReader = new(ttsSpeaker);
     }
 
     // Update is called once per frame
