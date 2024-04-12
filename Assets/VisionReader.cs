@@ -1,14 +1,10 @@
 ﻿using Meta.WitAi.TTS.Utilities;
-using UnityEngine;
-using UnityEngine.InputSystem;
 using AccessibilityTags;
 
 namespace Assets
 {
     public class VisionReader
     {
-        private InputAction speakAction, stopAction;
-
         private bool speakerEnabled = true;
 
         private TTSSpeaker ttsSpeaker;
