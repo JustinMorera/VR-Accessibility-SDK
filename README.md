@@ -12,11 +12,11 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
 ### Manual Installation:
 1. Download the Accessibility in VR Unity SDK from GitHub.
 2. Insert the SDK package files into your Unity project:
-    a. Open project in Unity.
-    b. Right-click **/Packages** folder in lower menu's "Project" tab.
-    c. Select "Show in Explorer"
-    d. Add the **VR-Accessibility-SDK** folder to project's **/Packages** directory.
-    e. Allow Unity to reload the project.
+    - a. Open project in Unity.
+    - b. Right-click **/Packages** folder in lower menu's "Project" tab.
+    - c. Select "Show in Explorer"
+    - d. Add the **VR-Accessibility-SDK** folder to project's **/Packages** directory.
+    - e. Allow Unity to reload the project.
     
 ### Install via Unity Package Manager import feature:
 1. Navigate to **'Window -> Package Manager'** using the tabs on the top of the Unity platform.
@@ -33,11 +33,23 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
     1. Add an instance of the *Partial Vision Assistance* prefab tool to scene.
     2. Set input command for Partial Vision tool using Unity's Input System.
     3. Under *Partial Vision Assistance*'s *Partial Vis* script:
-        a. Select a Raycast Origin corresponding to the player's right-controller (recommended), or any other object.
-        b. Set an Input System button reference corresponding to the previously set input command.
+        - a. Select a Raycast Origin corresponding to the player's right-controller (recommended), or any other object.
+        - b. Set an Input System button reference corresponding to the previously set input command.
     4. Under *Partial Vision Assistance*'s *Menu Manager* script:
-        a. Select a Head corresponding to the player's camera viewpoint (recommended), or any other object.
-        b. Set Input System Display and Hide references corresponding to the previously set input command, or any other desired Input System references.
+        - a. Select a *'Head'* corresponding to the player's camera viewpoint (recommended), or any other object.
+        - b. Set Input System *'Display'* and *'Hide'* references corresponding to the previously set input command, or any other desired Input System references.
+* To use Text-to-Speech in scene:
+    1. Use **'Oculus'/'Voice SDK'/'Get Started'** command in upper Unity menu bar to bring up Setup Window.
+        - a. Select a language to use built-in-NLP.
+        - b. Press **'Create'** and name file as desired.
+    2. Use **'Assets'/'Create'/'Voice SDK'/'TTS'/'Add Default TTS Setup'** command in upper Unity menu bar to add TTS object in hierarchy.
+    3. Expand **'TTS'** object and select **'TTSWitService'** object.
+        - a. Ensure **'Configuration'** is set to Wit configuration file created in step 1.
+        - b. Set **'Audio Type'** to *'WAV'*.
+        - c. Optional: Set **'Disk Cache Location'** from *'Stream'* to *'Temporary'* to store prompt audio data for faster performance.
+    4. Select **'Partial Vision Assistance'** object in hierarchy.
+        - a. Check **'Speak After Menu Close'** to allow voice to continue speaking if floating menu is closed prematurely.
+        - b. Set **'TTS Speaker'** option to *'TTS Speaker'* object in hierarchy under *'TTS'* object.
 
 ## Requirements
 * Requires Unity version **2021.3.37f1**
