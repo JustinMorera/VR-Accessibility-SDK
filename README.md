@@ -40,7 +40,7 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
         b. Set Input System Display and Hide references corresponding to the previously set input command, or any other desired Input System references.
 
 ## Requirements
-* Requires Unity version **2021.3.26f**
+* Requires Unity version **2021.3.37f1**
 * Unity's **'InputSystem'** and **'XR.Interaction'** modules must be installed to the scene in order for the Partial Vision Tool to function.
     * The modules can be installed by following these steps:
         1. Open the Unity Editor.
