@@ -20,7 +20,7 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
     
 ### Install via Unity Package Manager import feature:
 1. Navigate to **'Window -> Package Manager'** using the tabs on the top of the Unity platform.
-2. In the Package Manager window, press the **'+'** icon on the top-left and press *'Add package from git URL...'* and enter this project's URL, *'https://github.com/JustinMorera/VR-Accessbility-SDK.git'*.
+2. In the Package Manager window, press the **'+'** icon on the top-left and press *'Add package from git URL...'* and enter this project's URL, *https://github.com/JustinMorera/VR-Accessbility-SDK.git*.
 3. The package will automatically install.
     
 ## Usage
@@ -68,3 +68,6 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
 
 ## Contact
 For questions, feedback, or support, contact us at [ju691930@ucf.edu](ju691930@ucf.edu).
+
+## Instructional Video
+*https://youtu.be/6jOx0Ex7318?si=x0aCYIxTeiTHFE0b&t=225*
