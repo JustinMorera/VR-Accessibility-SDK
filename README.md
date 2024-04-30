@@ -67,7 +67,9 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
 ?
 
 ## Contact
-For questions, feedback, or support, contact us at [ju691930@ucf.edu](ju691930@ucf.edu).
+For questions, feedback, or support, contact us:
+Project Owner: [Joey Down](jdown93@gmail.com)
+Primary Developer: [Justin Morera](ju691930@ucf.edu).
 
 ## Instructional Video
 *https://youtu.be/6jOx0Ex7318?si=x0aCYIxTeiTHFE0b&t=225*
