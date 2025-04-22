@@ -64,7 +64,7 @@ The VR Accessibility SDK is a toolkit designed to make virtual reality experienc
     * 
 
 ## License
-?
+Apache 2.0
 
 ## Contact
 For questions, feedback, or support, contact us:
